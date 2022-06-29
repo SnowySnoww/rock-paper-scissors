@@ -1,11 +1,15 @@
 let computerChoice;
 let playerChoice;
 let result;
+let playerWins = 0;
+let computerWins = 0;
 
 for(n = 0; n <= 4; n++){
     playRound();
     console.log(getResult());
 }
+
+winCount();
 
 function playRound(){
     computerPlay(0, 2);
@@ -90,12 +94,18 @@ function testResult(){
     }
 }
 
+function winCount(){
+    return console.log(`RESULTS: The Player won ${playerWins} times in total!\nThe Computer won ${computerWins} times in total!`);
+}
+
 function getResult(){
     if (result == 0){
         return `The Player chose ${playerChoice} and the Computer chose ${computerChoice}!\nIt's a tie!`;
     }else if(result == 1){
+        computerWins++;
         return `The Player chose ${playerChoice} and the Computer chose ${computerChoice}!\nThe Computer won!`;
     }else if (result == 2){
-        return `The Player chose ${playerChoice} and the Computer chose ${computerChoice}!\nThe Player won!`
+        playerWins++;
+        return `The Player chose ${playerChoice} and the Computer chose ${computerChoice}!\nThe Player won!`;
     }
 }
