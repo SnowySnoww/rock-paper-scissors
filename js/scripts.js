@@ -72,6 +72,10 @@ function rockButton(){
             score.textContent = `${playerScore}:${computerScore}`
         }
     }
+    if(roundCount >= 5){
+        findWinner();
+        reset();
+    }
 }
 
 function paperButton(){
@@ -128,6 +132,10 @@ function paperButton(){
                 computerScore++;
                 score.textContent = `${playerScore}:${computerScore}`
             }
+    }
+    if(roundCount >= 5){
+        findWinner();
+        reset();
     }
 }
 
@@ -186,6 +194,10 @@ function scissorsButton(){
                 score.textContent = `${playerScore}:${computerScore}`
             }
     }
+    if(roundCount >= 5){
+        findWinner();
+        reset();
+    }
 }
 
 function computerPlay(){
@@ -226,40 +238,39 @@ function computerPlay(){
 function findWinner(){
     if(isEnglish == true){
         if(playerScore == computerScore){
-            resultInfo.innerHTML = `You won ${playerScore} times and the computer won ${computerChoice} times`
+            resultInfo.innerHTML = `You won ${playerScore} times and the computer won ${computerScore} times`
             resultInfoExtra.textContent = "It is a tie!"
             result.appendChild(resultInfo);
             resultInfo.appendChild(resultInfoExtra);
         }else if(playerScore > computerScore){
-            resultInfo.innerHTML = `You won ${playerScore} times and the computer won ${computerChoice} times`
+            resultInfo.innerHTML = `You won ${playerScore} times and the computer won ${computerScore} times`
             resultInfoExtra.textContent = "You've won the game!"
             result.appendChild(resultInfo);
             resultInfo.appendChild(resultInfoExtra);
         }else{
-            resultInfo.innerHTML = `You won ${playerScore} times and the computer won ${computerChoice} times`
+            resultInfo.innerHTML = `You won ${playerScore} times and the computer won ${computerScore} times`
             resultInfoExtra.textContent = "The computer won the game!"
             result.appendChild(resultInfo);
             resultInfo.appendChild(resultInfoExtra);
         }
     }else{
         if(playerScore == computerScore){
-            resultInfo.innerHTML = `Você ganhou ${playerScore} vezes e o computador ganhou ${computerChoice} vezes`
+            resultInfo.innerHTML = `Você ganhou ${playerScore} vezes e o computador ganhou ${computerScore} vezes`
             resultInfoExtra.textContent = "É um empate!"
             result.appendChild(resultInfo);
             resultInfo.appendChild(resultInfoExtra);
         }else if(playerScore > computerScore){
-            resultInfo.innerHTML = `Você ganhou ${playerScore} vezes e o computador ganhou ${computerChoice} vezes`
+            resultInfo.innerHTML = `Você ganhou ${playerScore} vezes e o computador ganhou ${computerScore} vezes`
             resultInfoExtra.textContent = "Você ganhou o jogo!"
             result.appendChild(resultInfo);
             resultInfo.appendChild(resultInfoExtra);
         }else{
-            resultInfo.innerHTML = `Você ganhou ${playerScore} vezes e o computador ganhou ${computerChoice} vezes`
+            resultInfo.innerHTML = `Você ganhou ${playerScore} vezes e o computador ganhou ${computerScore} vezes`
             resultInfoExtra.textContent = "Você perdeu o jogo!"
             result.appendChild(resultInfo);
             resultInfo.appendChild(resultInfoExtra);
         }
     }
-    
 }
 
 function getRandomNum(){
@@ -271,6 +282,14 @@ function makeUpperCase(){
     computerChoice = computerChoice.toUpperCase();
 }
 
+function reset(){
+    roundCount = 0;
+    playerScore = 0;
+    computerScore = 0;
+    score.textContent = `${playerScore}:${computerScore}`
+    imageLeft.src = "./imgs/rock-left.png"
+    imageRight.src = "./imgs/rock-right.png"
+}
 
 function changeColor(){
     isDark = !isDark;
