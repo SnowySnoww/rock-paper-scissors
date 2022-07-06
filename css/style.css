@@ -1,7 +1,35 @@
 body{
     font-family: "Roboto", sans-serif;
+    padding: 5%;
+    text-align: center;
 }
 
 p{
     font-size: 18px;
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+}
+
+.top{
+    display: flex;
+    flex-direction: row;
+    padding-left: 80%;
+}
+
+.title{
+    flex-grow: 2;
+}
+
+.score{
+    font-size: 36px;
+}
+
+.content{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }

@@ -3,11 +3,33 @@
     <head>
         <meta charset="utf-8">
         <title>Rock, paper, scissors!</title>
-        <script src="./js/scripts.js"></script>
+        <script type="module" src="./js/scripts.js" defer></script>
         <link rel="stylesheet" href="./css/style.css"></link>
     </head>
-    <body>
-        <h1>Test</h1>
-        <p>The magic is going on in the console. Press F12 to check it out.</p>
+    <body class="bodyInfo">
+        <div class="top">
+            <button class="language">Change Language</button>
+            <button class="darkMode">&#9789;</button>
+        </div>
+        <div class="main">
+            <h1 class="title">Rock, Paper, Scissors!</h1>
+            <div class="content">
+                <div class="leftSide">
+                    <h3 class="playerTitle">Player</h3>
+                    <img class="image" src="./imgs/rock-left.png">
+                </div>
+                <p class="score">Score</p>
+                <div class="rightSide">
+                    <h3 class="computerTitle">Computer</h3>
+                    <img class="image" src="./imgs/rock-right.png">
+                </div>
+            </div>
+            <p class="result">Results</p>
+            <div class="choices">
+                <button class="buttons buttonRock">Rock</button>
+                <button class="buttons buttonPaper">Paper</button>
+                <button class="buttons buttonScissors">Scissors</button>
+            </div>
+        </div>
     </body>
 </html>

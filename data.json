@@ -1,0 +1,22 @@
+[
+    {
+        "lang": "Change Language",
+        "title": "Rock, Paper, Scissors!",
+        "player": "Player",
+        "computer": "Computer",
+        "results": "Results",
+        "rock": "Rock",
+        "paper": "Paper",
+        "scissors": "Scissors"
+    },
+    {
+        "lang": "Mudar Língua",
+        "title": "Pedra, Papel, Tesoura!",
+        "player": "Jogador",
+        "computer": "Computador",
+        "results": "Resultados",
+        "rock": "Pedra",
+        "paper": "Papel",
+        "scissors": "Tesoura"
+    }
+]

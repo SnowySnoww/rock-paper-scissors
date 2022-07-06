@@ -1,111 +1,315 @@
-let computerChoice;
+import language from "../data.json" assert {type: "json"};
+import {body, lang, darkMode, title, playerTitle, computerTitle, score, result, buttonRock, buttonPaper, buttonScissors, imageLeft, imageRight} from "./selectors.js";
+
+let isEnglish = true;
+let isDark = false;
+let playerScore = 0;
+let computerScore = 0;
+let roundCount = 0;
 let playerChoice;
-let result;
-let playerWins = 0;
-let computerWins = 0;
+let computerChoice;
+let resultInfo = document.createElement("p");
+let resultInfoExtra = document.createElement("p");
 
-for(n = 0; n <= 4; n++){
-    playRound();
-    console.log(getResult());
-}
+score.textContent = `${playerScore}:${computerScore}`
 
-winCount();
+buttonRock.addEventListener("click", rockButton);
+buttonPaper.addEventListener("click", paperButton);
+buttonScissors.addEventListener("click", scissorsButton);
 
-function playRound(){
-    computerPlay(0, 2);
-    playerPlay();
-    testResult();
-}
-
-function getRandomNum(min, max){
-    return Math.round(Math.random() * (max-min) + min);
-}
-
-function computerPlay(min, max){
-    computerChoice = getRandomNum(min, max);
-    switch(computerChoice){
-        case 0:
-            computerChoice = "rock";
-            break;
-        case 1:
-            computerChoice = "paper";
-            break;
-        case 2:
-            computerChoice = "scissors";
-            break;
-    }
-    return computerChoice;
-}
-
-function playerPlay(){
-    let validChoice = false;
-    while(validChoice == false){
-        playerChoice = prompt(`Type "Rock", "Paper" or "Scissors"! (or 1, 2 or 3)`).toLowerCase().trim();
-    if (playerChoice == "rock" || playerChoice == "1"){
-        if(playerChoice == "1"){
-            playerChoice = "rock";
+function rockButton(){
+    roundCount++;
+    playerChoice = "rock";
+    imageLeft.src = "./imgs/rock-left.png"
+    computerPlay()
+    if(isEnglish == true){
+        if(playerChoice === computerChoice){
+            makeUpperCase();
+            resultInfo.innerHTML = `You chose ${playerChoice} and the computer chose ${computerChoice}`
+            resultInfoExtra.textContent = "It's a tie!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+        }else if(computerChoice == "paper"){
+            makeUpperCase();
+            resultInfo.innerHTML = `You chose ${playerChoice} and the computer chose ${computerChoice}`
+            resultInfoExtra.textContent = "The Computer won this round!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+            computerScore++;
+            score.textContent = `${playerScore}:${computerScore}`
+        }else{
+            makeUpperCase();
+            resultInfo.innerHTML = `You chose ${playerChoice} and the computer chose ${computerChoice}`
+            resultInfoExtra.textContent = "You won this round!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+            playerScore++;
+            score.textContent = `${playerScore}:${computerScore}`
         }
-        validChoice = true;
-        break;
-    }else if(playerChoice == "paper" || playerChoice == "2"){
-        if(playerChoice == "2"){
-            playerChoice = "paper";
-        }
-        validChoice = true;
-        break;
-    }else if(playerChoice == "scissors" || playerChoice == "3"){
-        if(playerChoice == "3"){
-            playerChoice = "scissors";
-        }
-        validChoice = true;
-        break;
     }else{
-        alert("Invalid choice.")
-        validChoice = false;
-    }
-    }
-}
-
-function testResult(){
-    if(computerChoice == "rock"){
-        if(playerChoice == "rock"){
-            return result = 0;
-        }else if(playerChoice == "paper"){
-            return result = 2;
+        playerChoice = "pedra";
+        if(playerChoice === computerChoice){
+            makeUpperCase();
+            resultInfo.innerHTML = `Você escolheu ${playerChoice} e o computador escolheu ${computerChoice}`
+            resultInfoExtra.textContent = "É um empate!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+        }else if(computerChoice == "papel"){
+            makeUpperCase();
+            resultInfo.innerHTML = `Você escolheu ${playerChoice} e o computador escolheu ${computerChoice}`
+            resultInfoExtra.textContent = "O computador venceu este round!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+            computerScore++;
+            score.textContent = `${playerScore}:${computerScore}`
         }else{
-            return result = 1;
-        }
-    }else if (computerChoice == "paper"){
-        if(playerChoice == "rock"){
-            return result = 1;
-        }else if(playerChoice == "paper"){
-            return result = 0;
-        }else{
-            return result = 2;
-        }
-    }else if (computerChoice == "scissors"){
-        if(playerChoice == "rock"){
-            return result = 2;
-        }else if(playerChoice == "paper"){
-            return result = 1;
-        }else{
-            return result = 0;
+            makeUpperCase();
+            resultInfo.innerHTML = `Você escolheu ${playerChoice} e o computador escolheu ${computerChoice}`
+            resultInfoExtra.textContent = "Você venceu este round!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+            playerScore++;
+            score.textContent = `${playerScore}:${computerScore}`
         }
     }
 }
 
-function winCount(){
-    return console.log(`RESULTS: The Player won ${playerWins} times in total!\nThe Computer won ${computerWins} times in total!`);
-}
-
-function getResult(){
-    if (result == 0){
-        return `The Player chose ${playerChoice} and the Computer chose ${computerChoice}!\nIt's a tie!`;
-    }else if(result == 1){
-        computerWins++;
-        return `The Player chose ${playerChoice} and the Computer chose ${computerChoice}!\nThe Computer won!`;
-    }else if (result == 2){
-        playerWins++;
-        return `The Player chose ${playerChoice} and the Computer chose ${computerChoice}!\nThe Player won!`;
+function paperButton(){
+    roundCount++;
+    playerChoice = "paper";
+    imageLeft.src = "./imgs/paper-left.png"
+    computerPlay()
+    if(isEnglish == true){
+        if(playerChoice === computerChoice){
+            makeUpperCase();
+            resultInfo.innerHTML = `You chose ${playerChoice} and the computer chose ${computerChoice}`
+            resultInfoExtra.textContent = "It's a tie!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+        }else if(computerChoice == "rock"){
+            makeUpperCase();
+            resultInfo.innerHTML = `You chose ${playerChoice} and the computer chose ${computerChoice}`
+            resultInfoExtra.textContent = "You won this round!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+            playerScore++;
+            score.textContent = `${playerScore}:${computerScore}`
+        }else{
+            makeUpperCase();
+            resultInfo.innerHTML = `You chose ${playerChoice} and the computer chose ${computerChoice}`
+            resultInfoExtra.textContent = "The computer won this round!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+            computerScore++;
+            score.textContent = `${playerScore}:${computerScore}`
+        }
+        }else{
+            playerChoice = "papel";
+            if(playerChoice === computerChoice){
+                makeUpperCase();
+                resultInfo.innerHTML = `Você escolheu ${playerChoice} e o computador escolheu ${computerChoice}`
+                resultInfoExtra.textContent = "É um empate!"
+                result.appendChild(resultInfo);
+                resultInfo.appendChild(resultInfoExtra);
+            }else if(computerChoice == "pedra"){
+                makeUpperCase();
+                resultInfo.innerHTML = `Você escolheu ${playerChoice} e o computador escolheu ${computerChoice}`
+                resultInfoExtra.textContent = "Você venceu este round!"
+                result.appendChild(resultInfo);
+                resultInfo.appendChild(resultInfoExtra);
+                playerScore++;
+                score.textContent = `${playerScore}:${computerScore}`
+            }else{
+                makeUpperCase();
+                resultInfo.innerHTML = `Você escolheu ${playerChoice} e o computador escolheu ${computerChoice}`
+                resultInfoExtra.textContent = "O computador venceu este round!"
+                result.appendChild(resultInfo);
+                resultInfo.appendChild(resultInfoExtra);
+                computerScore++;
+                score.textContent = `${playerScore}:${computerScore}`
+            }
     }
 }
+
+function scissorsButton(){
+    roundCount++;
+    playerChoice = "scissors";
+    imageLeft.src = "./imgs/scissors-left.png"
+    computerPlay()
+    if(isEnglish == true){
+        if(playerChoice === computerChoice){
+            makeUpperCase();
+            resultInfo.innerHTML = `You chose ${playerChoice} and the computer chose ${computerChoice}`
+            resultInfoExtra.textContent = "It's a tie!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+        }else if(computerChoice == "paper"){
+            makeUpperCase();
+            resultInfo.innerHTML = `You chose ${playerChoice} and the computer chose ${computerChoice}`
+            resultInfoExtra.textContent = "You won this round!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+            playerScore++;
+            score.textContent = `${playerScore}:${computerScore}`
+        }else{
+            makeUpperCase();
+            resultInfo.innerHTML = `You chose ${playerChoice} and the computer chose ${computerChoice}`
+            resultInfoExtra.textContent = "The Computer won this round!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+            computerScore++;
+            score.textContent = `${playerScore}:${computerScore}`
+        }
+    }else{
+            playerChoice = "tesoura";
+            if(playerChoice === computerChoice){
+                makeUpperCase();
+                resultInfo.innerHTML = `Você escolheu ${playerChoice} e o computador escolheu ${computerChoice}`
+                resultInfoExtra.textContent = "É um empate!"
+                result.appendChild(resultInfo);
+                resultInfo.appendChild(resultInfoExtra);
+            }else if(computerChoice == "pedra"){
+                makeUpperCase();
+                resultInfo.innerHTML = `Você escolheu ${playerChoice} e o computador escolheu ${computerChoice}`
+                resultInfoExtra.textContent = "O computador venceu este round!"
+                result.appendChild(resultInfo);
+                resultInfo.appendChild(resultInfoExtra);
+                computerScore++;
+                score.textContent = `${playerScore}:${computerScore}`
+            }else{
+                makeUpperCase();
+                resultInfo.innerHTML = `Você escolheu ${playerChoice} e o computador escolheu ${computerChoice}`
+                resultInfoExtra.textContent = "Você venceu este round!"
+                result.appendChild(resultInfo);
+                resultInfo.appendChild(resultInfoExtra);
+                playerScore++;
+                score.textContent = `${playerScore}:${computerScore}`
+            }
+    }
+}
+
+function computerPlay(){
+    computerChoice = getRandomNum();
+    if(isEnglish == true){
+        switch(computerChoice){
+            case 0:
+                computerChoice = "rock";
+                imageRight.src = "./imgs/rock-right.png"
+                break;
+            case 1:
+                computerChoice = "paper";
+                imageRight.src = "./imgs/paper-right.png"
+                break;
+            case 2:
+                computerChoice = "scissors";
+                imageRight.src = "./imgs/scissors-right.png"
+                break;
+        }
+    }else{
+        switch(computerChoice){
+            case 0:
+                computerChoice = "pedra";
+                imageRight.src = "./imgs/rock-right.png"
+                break;
+            case 1:
+                computerChoice = "papel";
+                imageRight.src = "./imgs/paper-right.png"
+                break;
+            case 2:
+                computerChoice = "tesoura";
+                imageRight.src = "./imgs/scissors-right.png"
+                break;
+        }
+    }
+}
+
+function findWinner(){
+    if(isEnglish == true){
+        if(playerScore == computerScore){
+            resultInfo.innerHTML = `You won ${playerScore} times and the computer won ${computerChoice} times`
+            resultInfoExtra.textContent = "It is a tie!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+        }else if(playerScore > computerScore){
+            resultInfo.innerHTML = `You won ${playerScore} times and the computer won ${computerChoice} times`
+            resultInfoExtra.textContent = "You've won the game!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+        }else{
+            resultInfo.innerHTML = `You won ${playerScore} times and the computer won ${computerChoice} times`
+            resultInfoExtra.textContent = "The computer won the game!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+        }
+    }else{
+        if(playerScore == computerScore){
+            resultInfo.innerHTML = `Você ganhou ${playerScore} vezes e o computador ganhou ${computerChoice} vezes`
+            resultInfoExtra.textContent = "É um empate!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+        }else if(playerScore > computerScore){
+            resultInfo.innerHTML = `Você ganhou ${playerScore} vezes e o computador ganhou ${computerChoice} vezes`
+            resultInfoExtra.textContent = "Você ganhou o jogo!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+        }else{
+            resultInfo.innerHTML = `Você ganhou ${playerScore} vezes e o computador ganhou ${computerChoice} vezes`
+            resultInfoExtra.textContent = "Você perdeu o jogo!"
+            result.appendChild(resultInfo);
+            resultInfo.appendChild(resultInfoExtra);
+        }
+    }
+    
+}
+
+function getRandomNum(){
+    return Math.floor(Math.random() * (3));
+}
+
+function makeUpperCase(){
+    playerChoice = playerChoice.toUpperCase();
+    computerChoice = computerChoice.toUpperCase();
+}
+
+
+function changeColor(){
+    isDark = !isDark;
+    if (isDark == true){
+        body.style.cssText = "color: white; background: #121212"
+        title.style.cssText = "color: #BB86FC"
+    }else{
+        body.style.cssText = "color: black; background: white"
+        title.style.cssText = "color: black"
+    }
+}
+
+function changeLang(){
+    isEnglish = !isEnglish;
+    if (isEnglish == true){
+        lang.textContent = language[0].lang;
+        title.textContent = language[0].title;
+        playerTitle.textContent = language[0].player;
+        computerTitle.textContent = language[0].computer;
+        result.textContent = language[0].results;
+        buttonRock.textContent = language[0].rock;
+        buttonPaper.textContent = language[0].paper;
+        buttonScissors.textContent = language[0].scissors;
+    }else{
+        lang.textContent = language[1].lang;
+        title.textContent = language[1].title;
+        playerTitle.textContent = language[1].player;
+        computerTitle.textContent = language[1].computer;
+        result.textContent = language[1].results;
+        buttonRock.textContent = language[1].rock;
+        buttonPaper.textContent = language[1].paper;
+        buttonScissors.textContent = language[1].scissors;
+    }
+}
+
+
+if(roundCount >= 5){
+    findWinner();
+}
+
+lang.addEventListener("click", changeLang)
+darkMode.addEventListener("click", changeColor)
